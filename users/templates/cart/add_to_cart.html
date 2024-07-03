@@ -1,0 +1,7 @@
+<h1>Add Item to Cart</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add to Cart</button>
+</form>
+<a href="{% url 'view_cart' %}">Back to Cart</a>

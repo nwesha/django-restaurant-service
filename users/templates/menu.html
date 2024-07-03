@@ -1,0 +1,92 @@
+{% extends 'base.html' %} {% block content %}
+<div class="menu">
+<h2 class='menu-h'>Menu</h2>
+
+<form method="GET" action="{% url 'menu' %}" class="search-form">
+  <input
+    type="text"
+    name="q"
+    placeholder="Search menu items..."
+    value="{{ request.GET.q }}"
+  />
+  <button type="submit">Search</button>
+</form>
+<a href="{% url 'view_cart' %}" class="view-cart-button">View Cart</a>
+
+<div class="menu-items">
+  {% for item in menu_items %}
+  <div class="menu-item-card">
+    <h3 class="desc">{{ item.name }}</h3>
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img
+            src="{{ item.picture.url }}"
+            alt="{{ item.name }} picture"
+            class="menu-item-image"
+          />
+        </div>
+        <div class="flip-card-back">
+          <p>{{ item.description }}</p>
+        </div>
+      </div>
+    </div>
+    <p class="desc">Price: Rs {{ item.price }}</p>
+    <form
+      method="POST"
+      action="{% url 'add_to_cart' %}"
+      class="add-to-cart-form"
+      data-item-name="{{ item.name }}"
+    >
+      {% csrf_token %}
+      <input type="hidden" name="menu_item_id" value="{{ item.id }}" />
+      <button type="submit" class="add-to-cart-button">Add to Cart</button>
+    </form>
+  </div>
+  {% endfor %}
+</div>
+
+<div id="notification" class="notification" style="display: none;">
+    <span id="notification-text"></span>
+  </div>
+  
+  <script>
+    document.querySelectorAll(".add-to-cart-form").forEach((form) => {
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+  
+        const formData = new FormData(this);
+        const itemName = this.getAttribute("data-item-name");
+  
+        fetch(this.action, {
+          method: this.method,
+          body: formData,
+          headers: {
+            "X-CSRFToken": formData.get("csrfmiddlewaretoken"),
+          },
+        })
+          .then((response) => {
+            if (response.ok) {
+              showNotification(itemName);
+            } else {
+              console.error("Failed to add item to cart");
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      });
+    });
+  
+    function showNotification(itemName) {
+      const notification = document.getElementById("notification");
+      const notificationText = document.getElementById("notification-text");
+      notificationText.textContent = `${itemName} added to cart!`;
+      notification.style.display = "block";
+      setTimeout(() => {
+        notification.style.display = "none";
+      }, 2000);
+    }
+  </script>
+</div>
+{% endblock %}

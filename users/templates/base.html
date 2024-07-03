@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="https://kit.fontawesome.com/6cbb0851b3.js" crossorigin="anonymous"></script>
+    <title>Restaurant Service</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li class='og'><a href="{% url 'home' %}"><i class="fa-solid fa-house"></i>Home</a></li>
+            {% if user.is_authenticated %}
+                <li class='og'><a href="{% url 'menu' %}"><i class="fa-solid fa-utensils"></i>Menu</a></li>
+                <li class='out'><a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+            {% else %}
+                <li class='og'><a href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i>Login</a></li>
+                <li class='og'><a href="{% url 'signup' %}"><i class="fa-solid fa-user-plus"></i>Signup</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <div class="content">
+        {% csrf_token %}
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
