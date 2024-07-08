@@ -14,11 +14,14 @@
                     <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
                     <button type="submit"><i class="fas fa-sync-alt"></i> Update</button>
                 </form>
-                <a href="{% url 'remove_cart_item' item.pk %}" class="remove-item"><i class="fas fa-trash-alt"></i> Remove</a>
+                <span class="item-total">Rs{{ item.total_price }}</span>
+                <a href="{% url 'remove_cart_item' item.pk %}" class="remove-item"><i class="fas fa-trash-alt"></i>Remove</a>
             </div>
         </li>
         {% endfor %}
     </ul>
+    <p>Total Amount: Rs{{ total_amount }}</p>
+<a href="{% url 'order_summary' %}">Proceed to Checkout</a>
     <a href="{% url 'menu' %}" class="add-more-items"><i class="fas fa-plus-circle"></i> Add More Items</a>
 </div>
 {% endblock %}
