@@ -15,7 +15,9 @@
             <li class='og'><a href="{% url 'home' %}"><i class="fa-solid fa-house"></i>Home</a></li>
             {% if user.is_authenticated %}
                 <li class='og'><a href="{% url 'menu' %}"><i class="fa-solid fa-utensils"></i>Menu</a></li>
-                <li class='og'><a href="{% url 'user_profile' %}">Profile</a></li>
+                <li class='og'><a href="{% url 'user_profile' %}"><i class="fa-solid fa-user"></i>Profile</a></li>
+                <li class='og'><a href="{% url 'view_cart' %}"><i class="fa-solid fa-basket-shopping"></i>Cart</a></li>
+
                 <li class='out'><a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
             {% else %}
                 <li class='og'><a href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i>Login</a></li>

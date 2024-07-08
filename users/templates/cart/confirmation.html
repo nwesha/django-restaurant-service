@@ -7,10 +7,47 @@
     <p>Order ID: {{ order.pk }}</p>
     <p>Total Amount: Rs.{{ order.total_amount }}</p>
     <p>Items:</p>
-    <ul>
+    <ul class="order-items">
         {% for item in order.items.all %}
         <li>{{ item.menu_item.name }} - Quantity: {{ item.quantity }}</li>
         {% endfor %}
     </ul>
 </div>
+
+<style>
+    .confirmation-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        border: 2px solid #b1605a;
+    background-color: #9c4d375e;
+    }
+
+    .confirmation-container h2 {
+        margin: 20px auto;
+    }
+    
+
+    .confirmation-container p {
+        font-family: "Philosopher", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #311508;
+        font-size: 1.1em;
+        margin: 10px 0;
+    }
+
+    .order-items {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .order-items li {
+        font-size: 1.1em;
+        margin: 5px 0;
+    }
+</style>
 {% endblock %}
