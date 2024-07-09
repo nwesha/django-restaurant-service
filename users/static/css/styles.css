@@ -427,6 +427,7 @@ h2 {
     border-radius: 10px;
     margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 25px solid #b06f6f;
 }
 
 .user-profile p {
@@ -462,7 +463,7 @@ h2 {
 .order-history {
     list-style: none;
     padding: 10px 0;
-    background-color: #b06f6f67;
+    background-color: #b06f6f;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -523,6 +524,7 @@ h2 {
 
     .content {
         padding: 10px;
+        margin-top: 100px;
     }
 
     .cart-item {
@@ -549,5 +551,67 @@ h2 {
     .menu-items {
         flex-direction: column;
         align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 3em;
+        padding: 20px 20px;
+    }
+    h4 {
+        font-size: 1.5em;
+        margin: auto 2em;
+    }
+    .auth {
+        width: 80%;
+    }
+    .auth input[type="text"],
+    .auth input[type="password"],
+    .auth input[type="email"] {
+        width: 70%;
+    }
+    .menu-h {
+        font-size: 2.5em;
+    }
+    .view-cart-button {
+        font-size: 1em;
+    }
+    .menu-item-card {
+        width: 100%;
+    }
+    nav li {
+        margin: 10px 0;
+    }
+    nav {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2em;
+        padding: 10px 10px;
+    }
+    h4 {
+        font-size: 1.2em;
+        margin: auto 1em;
+    }
+    .auth {
+        width: 90%;
+    }
+    .auth input[type="text"],
+    .auth input[type="password"],
+    .auth input[type="email"] {
+        width: 80%;
+    }
+    .menu-h {
+        font-size: 2em;
+    }
+    .view-cart-button {
+        font-size: 0.9em;
+    }
+    .menu-item-card {
+        width: 100%;
     }
 }
