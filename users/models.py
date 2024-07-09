@@ -29,7 +29,6 @@ class MenuItem(models.Model):
     def __str__(self):
         return self.name
     
-
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)  # Add this field
@@ -42,7 +41,6 @@ class CartItem(models.Model):
     menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     toShow = models.BooleanField(default=True)
-
 
     def __str__(self):
         return f"{self.quantity} of {self.menu_item.name}"

@@ -142,7 +142,11 @@ def confirm_order(request):
         print(f"No active cart found for user: {request.user.username}")
         return redirect('home')
 
+<<<<<<< HEAD
     items = CartItem.objects.filter(cart=cart,toShow=True)
+=======
+    items = CartItem.objects.filter(cart=cart, toShow=True)
+>>>>>>> dad88cd08e450a0ed9e4f87a23f8bffe1ccf5324
     if not items.exists():
         messages.error(request, "Your cart is empty.")
         print(f"Cart is empty for user: {request.user.username}")
@@ -163,6 +167,7 @@ def confirm_order(request):
     for item in items:
         item.toShow = False
         item.save(update_fields=['toShow'])
+        
 
     # Clear the cart items (optional)
     # cart.cartitem_set.all().delete()
