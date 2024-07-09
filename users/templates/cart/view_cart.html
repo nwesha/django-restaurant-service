@@ -15,15 +15,15 @@
                     <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
                     <button type="submit"><i class="fas fa-sync-alt"></i></button>
                 </form>
-                <span class="item-total">Rs{{ item.total_price }}</span>
+                <span class="item-total">Rs {{ item.total_price }}</span>
                 <a href="{% url 'remove_cart_item' item.pk %}" class="remove-item"><i class="fas fa-trash-alt"></i> Remove</a>
             </div>
         </li>
         {% endfor %}
     </ul>
-    <p class="total-amount">Total Amount: Rs{{ total_amount }}</p>
-    <a href="{% url 'order_summary' %}" class="checkout-button">Proceed to Checkout</a>
+    <p class="total-amount">Total Amount: Rs {{ total_amount }}</p>
     <a href="{% url 'menu' %}" class="add-more-items"><i class="fas fa-plus-circle"></i> Add More Items</a>
+    <a href="{% url 'order_summary' %}" class="checkout-button">Proceed to Checkout <i class="fa-solid fa-circle-check"></i></a>
     {% else %}
     <div class="empty-cart">
         <p>Your cart is empty.</p>
@@ -40,14 +40,17 @@
         background-color: #000000;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        font-style: normal;
+        
     }
-
+    
     .cart-items, .empty-cart {
         list-style-type: none;
         padding: 0;
     }
-
+    
     .cart-item {
+        font-family: "Kalam", cursive;
         display: flex;
         align-items: center;
         padding: 15px;
@@ -109,25 +112,28 @@
         font-weight: bold;
         margin-left: 20px;
     }
-
+    
     .remove-item {
+        font-family: 'roboto flex', sans-serif;
         color: #e74c3c;
         text-decoration: none;
         font-weight: bold;
     }
-
+    
     .remove-item:hover {
         text-decoration: underline;
     }
-
+    
     .total-amount {
+        font-family: 'roboto flex', sans-serif;
         font-size: 1.5em;
         font-weight: bold;
         text-align: right;
         margin-top: 20px;
     }
-
+    
     .checkout-button, .add-more-items {
+        font-family: 'roboto flex', sans-serif;
         display: inline-block;
         margin-top: 20px;
         padding: 10px 20px;

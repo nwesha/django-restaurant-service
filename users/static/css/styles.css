@@ -135,7 +135,7 @@ nav i {
     display: inline-block;
     margin-bottom: 20px;
     text-align: center;
-    
+    width: 40%;
 }
 
 label {
@@ -169,6 +169,12 @@ label {
 
 .auth-btn:hover {
     background-color: #000000;
+}
+
+ul.errorlist{
+    color: rgb(192, 0, 0);
+    font-weight: bold;
+    font-size: larger;
 }
 
 .menu{
@@ -427,7 +433,31 @@ h2 {
     font-size: 16px;
     margin: 10px 0;
     color: #000;
+    text-align: left;
 }
+
+.user-profile.content{
+    text-align: left;
+}
+.user-profile label{
+    color:#461b29;
+}
+
+.edit-profile-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.edit-profile-link:hover {
+    background-color: #0056b3;
+}
+
+
 
 .order-history {
     list-style: none;

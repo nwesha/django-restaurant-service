@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from .models import MenuItem, CartItem, Cart, Order, UserProfile
-from .forms import CartItemForm
+from .forms import CartItemForm, UserProfileForm
 from django.contrib import messages
 
 def home(request):
@@ -55,14 +55,14 @@ def view_cart(request):
             primary_cart = active_carts.first()
             for extra_cart in active_carts[1:]:
                 for item in extra_cart.cartitem_set.all():
-                    cart_item, item_created = CartItem.objects.get_or_create(cart=primary_cart, menu_item=item.menu_item)
+                    cart_item, item_created = CartItem.objects.get_or_create(cart=primary_cart, menu_item=item.menu_item, toShow=True)
                     if not item_created:
                         cart_item.quantity += item.quantity
                     cart_item.save()
                 extra_cart.delete()
             cart = primary_cart
     
-    items = CartItem.objects.filter(cart=cart)
+    items = CartItem.objects.filter(cart=cart, toShow=True)
     for item in items:
         item.total_price = item.menu_item.price * item.quantity
 
@@ -124,7 +124,7 @@ def order_summary(request):
         messages.error(request, "You don't have any items in your cart.")
         return redirect('menu')
 
-    items = CartItem.objects.filter(cart=cart)
+    items = CartItem.objects.filter(cart=cart,toShow=True)
     if not items.exists():
         messages.error(request, "Your cart is empty.")
         return redirect('menu')
@@ -142,7 +142,7 @@ def confirm_order(request):
         print(f"No active cart found for user: {request.user.username}")
         return redirect('home')
 
-    items = CartItem.objects.filter(cart=cart)
+    items = CartItem.objects.filter(cart=cart,toShow=True)
     if not items.exists():
         messages.error(request, "Your cart is empty.")
         print(f"Cart is empty for user: {request.user.username}")
@@ -159,9 +159,13 @@ def confirm_order(request):
     # Deactivate the cart
     cart.is_active = False
     cart.save()
+    
+    for item in items:
+        item.toShow = False
+        item.save(update_fields=['toShow'])
 
     # Clear the cart items (optional)
-    cart.cartitem_set.all().delete()
+    # cart.cartitem_set.all().delete()
 
     return render(request, 'cart/confirmation.html', {'order': order})
 
@@ -174,3 +178,17 @@ def user_profile(request):
         return render(request, 'profile.html', {'user_profile': user_profile, 'orders': orders})
     except UserProfile.DoesNotExist:
         return render(request, 'profile.html', {'user_profile': None, 'orders': None})
+    
+@login_required
+def edit_profile(request):
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your profile was updated successfully.')
+            return redirect('user_profile')
+    else:
+        form = UserProfileForm(instance=user_profile)
+    
+    return render(request, 'edit_profile.html', {'form': form})

@@ -8,7 +8,12 @@
         <p><strong>Username:</strong> {{ user_profile.user.username }}</p>
         <p><strong>Email:</strong> {{ user_profile.user.email }}</p>
         <p><strong>Full Name:</strong> {{ user_profile.full_name }}</p>
-        <!-- Add any other user profile fields you have -->
+        <p><strong>Birthday:</strong> {{ user_profile.birthday }}</p>
+        <p><strong>Gender:</strong> {{ user_profile.get_gender_display }}</p>
+        <p><strong>Phone Number:</strong> {{ user_profile.phone_number }}</p>
+        <p><strong>Email ID:</strong> {{ user_profile.email_id }}</p>
+        <p><strong>Address:</strong> {{ user_profile.address }}</p>
+        <a href="{% url 'edit_profile' %}" class='edit-profile-link'>Edit Profile</a>
     </div>
     <h2>Order History</h2>
     <ul class="order-history">
