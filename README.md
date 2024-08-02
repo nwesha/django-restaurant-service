@@ -2,6 +2,9 @@
 
 Django Restaurant Service is a Django-based web application designed to manage a restaurant service. The project provides functionalities for managing menus, orders, and users within a restaurant context.
 
+### Screenshots/ScreenRec of the Project
+[Google drive link](https://drive.google.com/drive/folders/1V1wCT6BM57DcuG_oCaSDKy9MMdlAn4bo?usp=sharing)
+
 ## Features
 
 ### Menu Management
